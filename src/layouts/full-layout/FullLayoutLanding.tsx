@@ -25,7 +25,6 @@ const MainWrapper = styled('div')(() => ({
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
-    filter: 'blur(20px)',
     zIndex: -2,
   },
   '&::after': {
@@ -35,13 +34,11 @@ const MainWrapper = styled('div')(() => ({
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: '#FAFBFB',
-    opacity: 0.8,
     zIndex: -1,
   },
 }));
 
-const PageWrapper = styled('div')(({ theme }) => ({
+const PageWrapper = styled('div')(({ theme }: { theme: Theme }) => ({
   display: 'flex',
   flex: '1 1 auto',
   overflow: 'hidden',
@@ -54,18 +51,10 @@ const PageWrapper = styled('div')(({ theme }) => ({
   },
 }));
 
-const FullLayout: React.FC = () => {
-  const [isSidebarOpen, setSidebarOpen] = useState<boolean>(true);
+const FullLayoutLanding: React.FC = () => {
+  const [isSidebarOpen, setSidebarOpen] = useState<boolean>(false);
   const [isMobileSidebarOpen, setMobileSidebarOpen] = useState<boolean>(false);
   const lgUp = useMediaQuery((theme: Theme) => theme.breakpoints.up('lg'));
-
-  const handleSidebarToggle = () => {
-    setSidebarOpen(!isSidebarOpen);
-  };
-
-  const handleMobileSidebarToggle = () => {
-    setMobileSidebarOpen(!isMobileSidebarOpen);
-  };
 
   return (
     <MainWrapper>
@@ -74,16 +63,14 @@ const FullLayout: React.FC = () => {
           paddingLeft: isSidebarOpen && lgUp ? '265px' : '',
           backgroundColor: 'transparent',
         }}
-        toggleSidebar={handleSidebarToggle}
-        toggleMobileSidebar={handleMobileSidebarToggle}
+        toggleSidebar={() => setSidebarOpen(!isSidebarOpen)}
+        toggleMobileSidebar={() => setMobileSidebarOpen(true)}
       />
-
       <Sidebar
         isSidebarOpen={isSidebarOpen}
         isMobileSidebarOpen={isMobileSidebarOpen}
         onSidebarClose={() => setMobileSidebarOpen(false)}
       />
-
       <PageWrapper>
         <Container
           maxWidth={false}
@@ -102,4 +89,4 @@ const FullLayout: React.FC = () => {
   );
 };
 
-export default FullLayout;
+export default FullLayoutLanding;

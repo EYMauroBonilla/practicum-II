@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { BuildTheme } from '../../assets/global/Theme-varaible';
+import { BuildTheme } from '../../assets/global/Theme-variable';
 
 interface CustomizerState {
   activeDir: 'ltr' | 'rtl';
